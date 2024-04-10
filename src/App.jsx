@@ -19,7 +19,7 @@ function App() {
 		);
 	};
 	return (
-		<div className="bg-slate-950">
+		<div className="bg-slate-100">
 			<Routes>
 				<Route path="/" errorElement={<NotFound />} element={<Layout />}>
 					<Route index element={<Home />} />

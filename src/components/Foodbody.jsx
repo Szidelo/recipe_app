@@ -28,7 +28,7 @@ const Foodbody = () => {
 	}
   return (
     <>
-        <section className="w-full flex justify-center py-8">
+        <section className="w-full flex justify-center py-8 bg-slate-950">
 				<div className="relative">
 					<Input type="text" ref={food} isSearchInput={true} placeholder='Search food...'/>
 					<IoSearchSharp

@@ -4,7 +4,7 @@ import HomeBody from "../components/HomeBody";
 
 const Home = () => {
 	return (
-		<main>
+		<main className="bg-slate-100">
 			<Header title={"Welcome to LesMunchees"} info={false} mode={'full'}/>
 			<HomeBody />
 		</main>

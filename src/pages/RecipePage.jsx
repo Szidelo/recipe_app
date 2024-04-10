@@ -43,7 +43,7 @@ const RecipePage = () => {
 		return <div>Is loading</div>;
 	}
 
-	if(!recipe) {
+	if (!recipe) {
 		return <div>Is loading</div>;
 	}
 
@@ -55,10 +55,9 @@ const RecipePage = () => {
 					<Header title={recipe?.label} image={recipe?.images?.LARGE?.url ?? recipe?.image} />
 				)}
 			</div>
-			<div className="bg-slate-100 w-full flex flex-col justify-center items-center">
-				<h1 className="text-5xl">{recipe?.label}</h1>
-				<div>World cousine: {recipe?.cuisineType[0] || "Not Specified"}</div>
-				<div className="flex gap-8">
+			<div className="bg-slate-100 w-full flex flex-col justify-center items-center container mx-auto">
+				<div className="mt-20">World cousine: {recipe?.cuisineType[0] || "Not Specified"}</div>
+				<div className="mt-10 flex gap-8">
 					<span className="bg-green-600 text-slate-100 capitalize rounded-full px-3 py-1 me-1">
 						{(recipe.calories?.toFixed() / 1000).toFixed()} kcal
 					</span>
@@ -68,18 +67,21 @@ const RecipePage = () => {
 					<span className="bg-green-600 text-slate-100 capitalize rounded-full px-3 py-1 me-1">
 						{recipe.yield} servings
 					</span>
-
 				</div>
-				<div className="grid grid-cols-2 w-full">
-					<div>
+				<div className="grid grid-cols-2 w-full mt-16">
+					<div className="">
 						<div>
-							<h1>ingredients</h1>
-							<ul className="ms-10">
+							<h1 className="text-5xl font-bold capitalize">ingredients</h1>
+							<ul className="mt-16">
 								{recipe.ingredients.map((ingredient, index) => (
 									<li key={index}>
-										<div>
-											<img className="w-7 h-7 object-cover rounded-xl" src={ingredient.image} alt="" />
-											<p className="text-xl text-green-600">{ingredient.food}</p>
+										<div className="flex gap-5 pb-2">
+											<img
+												className="w-7 h-7 object-cover rounded-xl"
+												src={ingredient.image}
+												alt=""
+											/>
+											{/* <p className="text-xl text-green-600">{ingredient.food}</p> */}
 											<p>{ingredient.text}</p>
 										</div>
 									</li>
@@ -87,27 +89,30 @@ const RecipePage = () => {
 							</ul>
 						</div>
 					</div>
-					<div className="flex flex-col max-w-[300px]">
-						{isLoading && <div className="text-5xl text-red-600">Wainting to fetch data</div>}
-						{recipes.splice(1, 4).map((recipe) => {
-							let image;
-							if (recipe.recipe.images && recipe.recipe.images.LARGE) {
-								image = recipe.recipe.images.LARGE.url;
-							} else {
-								image = recipe.recipe.image;
-							}
+					<div className="flex flex-col">
+						<h1 className="text-5xl font-bold capitalize mb-16">Related recipes</h1>
+						<div className="grid grid-cols-2 gap-5">
+							{isLoading && <div className="text-5xl text-red-600">Wainting to fetch data</div>}
+							{recipes.splice(1, 6).map((recipe) => {
+								let image;
+								if (recipe.recipe.images && recipe.recipe.images.LARGE) {
+									image = recipe.recipe.images.LARGE.url;
+								} else {
+									image = recipe.recipe.image;
+								}
 
-							return (
-								<FoodBody
-									key={recipe.recipe.url}
-									bgImage={image}
-									title={recipe.recipe.label}
-									info={recipe.recipe.mealType}
-									cuisine={recipe.recipe.cuisineType}
-									uri={recipe.recipe.uri}
-								/>
-							);
-						})}
+								return (
+									<FoodBody
+										key={recipe.recipe.url}
+										bgImage={image}
+										title={recipe.recipe.label}
+										info={recipe.recipe.mealType}
+										cuisine={recipe.recipe.cuisineType}
+										uri={recipe.recipe.uri}
+									/>
+								);
+							})}
+						</div>
 					</div>
 				</div>
 			</div>
