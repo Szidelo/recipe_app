@@ -9,10 +9,9 @@ export function useFetch( fetchFn, initialValue, keyWord ) {
         async function handleFetch() {
             setIsFetching(true);
 			try {
-				const data = await fetchFn(keyWord || 'best');
+				const data = await fetchFn(keyWord);
 				setFetchData(data);
 				setIsFetching(false);
-                // console.log(data)
 			} catch (error) {
 				setError({ message: error.message || "Failed to fetch data" });
 			}
